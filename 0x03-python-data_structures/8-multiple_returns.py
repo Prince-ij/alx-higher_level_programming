@@ -1,7 +1,6 @@
 #!/usr/bin/bash
 def multiple_returns(sentence):
-   if sentence == "":
-       fc = None
-
-    fc = sentence[0]
-    return len(sentence), fc
+    if not sentence:
+        return (0, None)
+    else:
+        return(len(sentence), sentence[0])
