@@ -2,7 +2,7 @@
 
 # Check if the PYFILE environment variable is set
 if [ -z "$PYFILE" ]; then
-    echo "Error: PYFILE environment variable is not set."
+    echo "Error: PYFILE environment variable is not set. Please set it to the name of the Python script you want to compile."
     exit 1
 fi
 
