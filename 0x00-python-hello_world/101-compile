@@ -1,1 +1,21 @@
+#!/bin/bash
+
+# Check if the PYFILE environment variable is set
+if [ -z "$PYFILE" ]; then
+    echo "Error: PYFILE environment variable is not set."
+    exit 1
+fi
+
+# Check if the specified Python file exists
+if [ ! -f "$PYFILE" ]; then
+    echo "Error: The specified Python file '$PYFILE' does not exist."
+    exit 1
+fi
+
+# Compile the Python script and save it with the .pyc extension
+output_file="${PYFILE%.py}.pyc"
+python3 -m py_compile "$PYFILE" && mv "__pycache__/$PYFILE.cpython-*.pyc" "$output_file" && rm -rf "__pycache__"
+
+echo "Compiling $PYFILE ..."
+echo "Compiled output: $output_file"
 
