@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import marshal
-if __name__ = "__main__":
+if __name__ == "__main__":
     with open('hidden_4.pyc', 'rb') as file:
         file_content = file.read()
         code_object = marshal.loads(file_content[8:])
