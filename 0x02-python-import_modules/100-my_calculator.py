@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 from sys import argv, exit
-from calculator_1 import mul, sub,add, div
+from calculator_1 import mul, sub, add, div
 if __name__ == "__main__":
     a, b, op = int(argv[1]), int(argv[3]), argv[2]
-    la = len(argv) - 1
+    la = len(argv)
     ops = ['+', '-', '/', '*']
     choice = {'+': add, '-': sub, '*': mul, '/': div}
     for r in choice:
