@@ -10,7 +10,7 @@ if __name__ == "__main__":
         if r == op:
             res = choice[r](a, b)
             break
-    if la != 3:
+    if la != 4:
         print('Usage: ./100-my_calculator.py <a> <operator> <b>')
         exit(1)
     elif op not in ops:
