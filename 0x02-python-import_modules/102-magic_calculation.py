@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from magic_calculation_102 import add, sub
+from calculator_1 import add, sub
 
 def my_function(a, b):
     if a < b:
