@@ -1,12 +1,7 @@
 #!/usr/bin/python3
-import marshal
+import hidden_4
 if __name__ == "__main__":
-    with open('hidden_4.pyc', 'rb') as file:
-        file_content = file.read()
-        code_object = marshal.loads(file_content[8:])
-
-    names = code_object.co_names
-    names = sorted(name for name in names if not name.startswith('__'))
-    for name in names:
-        print(name)
-
+    mod = dir(hidden_4)
+    for mods in mod:
+        if not mods.startswith('__'):
+            print(mods)
