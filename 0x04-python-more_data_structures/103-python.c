@@ -3,15 +3,14 @@
 
 void print_python_list(PyObject *p)
 {
-    Py_ssize_t size, allocated, i;
+    Py_ssize_t size, i;
     PyObject *element;
 
-    size = PyList_Size(p);
-    allocated = ((PyListObject *)p)->allocated;
+    size = PyObject_Length(p);
 
     printf("[*] Python list info\n");
     printf("[*] Size of the Python List = %zd\n", size);
-    printf("[*] Allocated = %zd\n", allocated);
+    printf("[*] Allocated = %zd\n", ((PyListObject *)p)->allocated);
 
     for (i = 0; i < size; i++)
     {
@@ -22,14 +21,13 @@ void print_python_list(PyObject *p)
         {
             printf("bytes\n");
             printf("[.] bytes object info\n");
-            printf("  size: %zd\n", PyBytes_Size(element));
-            printf("  trying string: %s\n", PyBytes_AsString(element));
+            printf("  size: %zd\n", PyObject_Length(element));
+            printf("  trying string: %s\n", ((PyBytesObject *)element)->ob_sval);
 
-            printf("  first %zd bytes: ", (PyBytes_Size(element) < 10) ? PyBytes_Size(element) : 10);
-            unsigned char *str = (unsigned char *)PyBytes_AsString(element);
-            for (Py_ssize_t j = 0; j < ((PyBytes_Size(element) < 10) ? PyBytes_Size(element) : 10); j++)
+            printf("  first %zd bytes: ", PyObject_Length(element) < 10 ? PyObject_Length(element) : 10);
+            for (Py_ssize_t j = 0; j < (PyObject_Length(element) < 10 ? PyObject_Length(element) : 10); j++)
             {
-                printf("%02x%c", str[j], (j + 1 < ((PyBytes_Size(element) < 10) ? PyBytes_Size(element) : 10)) ? ' ' : '\n');
+                printf("%02hhx%c", ((PyBytesObject *)element)->ob_sval[j], j + 1 < (PyObject_Length(element) < 10 ? PyObject_Length(element) : 10) ? ' ' : '\n');
             }
         }
         else if (PyLong_Check(element))
@@ -68,15 +66,15 @@ void print_python_bytes(PyObject *p)
         return;
     }
 
-    size = PyBytes_Size(p);
-    str = (unsigned char *)PyBytes_AsString(p);
+    size = PyObject_Length(p);
+    str = (unsigned char *)((PyBytesObject *)p)->ob_sval;
 
     printf("  size: %zd\n", size);
     printf("  trying string: %s\n", str);
 
-    printf("  first %zd bytes: ", (size < 10) ? size : 10);
-    for (i = 0; i < ((size < 10) ? size : 10); i++)
+    printf("  first %zd bytes: ", size < 10 ? size : 10);
+    for (i = 0; i < (size < 10 ? size : 10); i++)
     {
-        printf("%02x%c", str[i], (i + 1 < ((size < 10) ? size : 10)) ? ' ' : '\n');
+        printf("%02hhx%c", str[i], i + 1 < (size < 10 ? size : 10) ? ' ' : '\n');
     }
 }
