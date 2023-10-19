@@ -52,7 +52,6 @@ void print_python_list(PyObject *p)
         }
     }
 }
-
 void print_python_bytes(PyObject *p)
 {
     Py_ssize_t size, i;
@@ -76,5 +75,9 @@ void print_python_bytes(PyObject *p)
     for (i = 0; i < (size < 10 ? size : 10); i++)
     {
         printf("%02x%c", str[i] & 0xff, i + 1 < (size < 10 ? size : 10) ? ' ' : '\n');
+    }
+    if (size < 10)
+    {
+        printf("0");
     }
 }
