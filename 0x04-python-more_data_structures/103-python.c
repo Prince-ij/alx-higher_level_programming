@@ -6,7 +6,7 @@ void print_python_list(PyObject *p)
     Py_ssize_t size, i;
     PyObject *element;
 
-    size = PyObject_Length(p);
+    size = ((PyVarObject *)p)->ob_size;
 
     printf("[*] Python list info\n");
     printf("[*] Size of the Python List = %zd\n", size);
@@ -14,20 +14,20 @@ void print_python_list(PyObject *p)
 
     for (i = 0; i < size; i++)
     {
-        element = PyList_GetItem(p, i);
+        element = ((PyListObject *)p)->ob_item[i];
         printf("Element %zd: ", i);
 
         if (PyBytes_Check(element))
         {
             printf("bytes\n");
             printf("[.] bytes object info\n");
-            printf("  size: %zd\n", PyObject_Length(element));
+            printf("  size: %zd\n", ((PyVarObject *)element)->ob_size);
             printf("  trying string: %s\n", ((PyBytesObject *)element)->ob_sval);
 
-            printf("  first %zd bytes: ", PyObject_Length(element) < 10 ? PyObject_Length(element) : 10);
-            for (Py_ssize_t j = 0; j < (PyObject_Length(element) < 10 ? PyObject_Length(element) : 10); j++)
+            printf("  first %zd bytes: ", ((PyVarObject *)element)->ob_size < 10 ? ((PyVarObject *)element)->ob_size : 10);
+            for (Py_ssize_t j = 0; j < (((PyVarObject *)element)->ob_size < 10 ? ((PyVarObject *)element)->ob_size : 10); j++)
             {
-                printf("%02hhx%c", ((PyBytesObject *)element)->ob_sval[j], j + 1 < (PyObject_Length(element) < 10 ? PyObject_Length(element) : 10) ? ' ' : '\n');
+                printf("%02x%c", ((PyBytesObject *)element)->ob_sval[j] & 0xff, j + 1 < (((PyVarObject *)element)->ob_size < 10 ? ((PyVarObject *)element)->ob_size : 10) ? ' ' : '\n');
             }
         }
         else if (PyLong_Check(element))
@@ -56,7 +56,7 @@ void print_python_list(PyObject *p)
 void print_python_bytes(PyObject *p)
 {
     Py_ssize_t size, i;
-    unsigned char *str;
+    char *str;
 
     printf("[.] bytes object info\n");
 
@@ -66,8 +66,8 @@ void print_python_bytes(PyObject *p)
         return;
     }
 
-    size = PyObject_Length(p);
-    str = (unsigned char *)((PyBytesObject *)p)->ob_sval;
+    size = ((PyVarObject *)p)->ob_size;
+    str = ((PyBytesObject *)p)->ob_sval;
 
     printf("  size: %zd\n", size);
     printf("  trying string: %s\n", str);
@@ -75,6 +75,6 @@ void print_python_bytes(PyObject *p)
     printf("  first %zd bytes: ", size < 10 ? size : 10);
     for (i = 0; i < (size < 10 ? size : 10); i++)
     {
-        printf("%02hhx%c", str[i], i + 1 < (size < 10 ? size : 10) ? ' ' : '\n');
+        printf("%02x%c", str[i] & 0xff, i + 1 < (size < 10 ? size : 10) ? ' ' : '\n');
     }
 }
