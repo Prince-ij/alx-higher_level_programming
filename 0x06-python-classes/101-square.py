@@ -85,11 +85,11 @@ class Square:
         Returns:
             str: The square using my_print().
         """
-        string_representation = ''
+        string_rep = ''
         if self.__size == 0:
-            string_representation += '\n'
+            string_rep += '\n'
         for i in range(self.__position[1]):
-            string_representation += '\n'
+            string_rep += '\n'
         for i in range(self.__size):
-            string_representation += ' ' * self.__position[0] + '#' * self.__size + '\n'
-        return string_representation[:-1]
+            string_rep += ' ' * self.__position[0] + '#' * self.__size + '\n'
+        return string_rep[:-1]
