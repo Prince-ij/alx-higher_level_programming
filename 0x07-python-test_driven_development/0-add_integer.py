@@ -5,7 +5,7 @@
 """
 
 
-def add(a, b=98):
+def add_integer(a, b=98):
     """
         Function that adds two numbers
 
