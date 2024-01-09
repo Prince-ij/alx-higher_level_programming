@@ -6,7 +6,7 @@ if (isNaN(numInt)) {
 }
 let square = '';
 let i;
-for (i = 0; i < numInt; ++i) square += 'x';
+for (i = 0; i < numInt; ++i) square += 'X';
 let j = 0;
 while (j < numInt) {
   console.log(square);
