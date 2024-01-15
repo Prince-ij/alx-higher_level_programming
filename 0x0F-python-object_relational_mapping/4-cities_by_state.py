@@ -9,7 +9,7 @@ if __name__ == '__main__':
     """
     Select city name, id and state name
     Also jotin the table where city.states.id
-    == cities.id
+    == states.id
     """
 
     conn = MySQLdb.connect(host='localhost', port=3306,
@@ -19,7 +19,7 @@ if __name__ == '__main__':
 
     cur.execute("""SELECT cities.id, cities.name, states.name
                 FROM cities
-                JOIN states ON cities.state_id = state.id
+                JOIN states ON cities.state_id = states.id
                 ORDER BY cities.id ASC;""")
     rows = cur.fetchall()
 
