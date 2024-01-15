@@ -24,8 +24,8 @@ if __name__ == '__main__':
                 ORDER BY cities.id ASC;""",
                 {'state_name': argv[4]})
     rows = cur.fetchall()
-    for row in rows:
-        print(row[1])
+    if rows is not None:
+        print(", ".join(row[1] for row in rows))
 
     cur.close()
     conn.close()
