@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" A Rectangle class """
+""" A Rectangle class implemented in OOP """
 
 
 class Rectangle:
