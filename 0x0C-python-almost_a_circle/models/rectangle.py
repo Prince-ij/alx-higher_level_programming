@@ -1,4 +1,5 @@
-lass Rectangle
+#!/usr/bin/python3
+class Rectangle
 '''
 from models.base import Base
 
