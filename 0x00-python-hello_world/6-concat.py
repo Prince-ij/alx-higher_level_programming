@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-str1 = "ALX"
-str2 = "School"
+str1 = "AL"
+str2 = "X"
 # comment
-print(f"Welcome to {str1}!")
+print(f"Welcome to {str1}{str2}!")
